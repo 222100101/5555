@@ -3,157 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Еко Олії СМБУ</title>
+    <title>Еко Олії СМБУ | Справжній холодний віджим</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
+        :root {
+            --primary-color: #2c5e3b; 
+            --accent-color: #d4a373; 
+            --bg-color: #faf8f5;
+            --text-color: #333333;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
-        .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+
+        header {
             background-color: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .product {
-            margin-bottom: 40px;
-            text-align: center; /* Центрування тексту */
-        }
-        .product-img {
-            width: 60%; /* Середній розмір зображення */
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 15px; /* Відступ між зображенням та текстом */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .description {
-            margin: 20px 0;
-        }
-        .prices {
-            margin: 20px 0;
+
+        .logo {
+            font-size: 24px;
             font-weight: bold;
-        }
-        .order-button {
-            display: block;
-            width: 80%; /* Зменшена ширина кнопки */
-            text-align: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
+            color: var(--primary-color);
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            margin: 20px auto 0; /* Центрування кнопки */
+            letter-spacing: 1px;
         }
-        .order-button:hover {
-            background-color: #45a049;
+
+        .header-cart-btn {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        .contact-info {
-            margin-top: 40px;
+
+        .header-cart-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            color: white;
+            overflow: hidden;
+            background-color: #1e4229; /* Заглушка, якщо немає відео */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1a3823;
+        }
+
+        .catalog {
+            padding: 60px 10%;
+        }
+
+        .catalog h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* ОНОВЛЕНІ СТИЛІ ДЛЯ ФОТО ПЛЯШОК */
+        .product-card img {
+            width: 100%;
+            height: 320px; /* Трохи збільшив висоту для високих пляшок */
+            object-fit: contain; /* Тепер пляшка не обрізається, а повністю поміщається */
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05); /* Легке збільшення пляшки при наведенні */
+        }
+
+        .product-card h3 {
+            font-size: 22px;
+            margin: 10px 0;
+            color: var(--primary-color);
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #666;
+            flex-grow: 1;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin: 15px 0;
+        }
+
+        .about-us {
+            background-color: #e9ecef;
+            padding: 60px 10%;
+            text-align: center;
+        }
+
+        .about-us p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 10%;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .modal-input {
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            box-sizing: border-box;
+            font-family: inherit;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Еко Олії Холодного Віджиму від СМБУ</h1>
-        <p>Натуральні продукти для вашого здоров'я</p>
-    </div>
+
+    <header>
+        <a href="#" class="logo">Еко Олії СМБУ</a>
+        <button class="header-cart-btn" onclick="openCart()">Кошик (<span id="cartCount">0</span>)</button>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Жива енергія природи</h1>
+            <p>Натуральні олії холодного віджиму для вашого здоров'я та краси</p>
+            <a href="#catalog" class="btn">Перейти до каталогу</a>
+        </div>
+    </section>
+
+    <section id="catalog" class="catalog">
+        <h2>Наша продукція</h2>
+        <div class="products-grid">
+            
+            <div class="product-card">
+                <img src="конопля.png" alt="Конопляна олія">
+                <h3>Конопляна олія</h3>
+                <p>Багата на білки, незамінні жирні кислоти та вітаміни. Підтримує здоров'я шкіри та загальний стан організму.</p>
+                <div class="price">330 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
+                <button class="btn" onclick="addToCart('Конопляна олія', 330)">Додати в кошик</button>
+            </div>
+
+            <div class="product-card">
+                <img src="льон.png" alt="Льняна олія">
+                <h3>Льняна олія</h3>
+                <p>Багате джерело омега-3 жирних кислот, сприяє зниженню рівня холестерину та покращенню роботи серця.</p>
+                <div class="price">230 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
+                <button class="btn" onclick="addToCart('Льняна олія', 230)">Додати в кошик</button>
+            </div>
+
+            <div class="product-card">
+                <img src="кмин.png" alt="Олія чорного кмину">
+                <h3>Олія чорного кмину</h3>
+                <p>Зберігає всі корисні властивості, багата на антиоксиданти та ідеально підходить для підтримки імунітету.</p>
+                <div class="price">730 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
+                <button class="btn" onclick="addToCart('Олія чорного кмину', 730)">Додати в кошик</button>
+            </div>
+
+            <div class="product-card">
+                <img src="гарбуз.png" alt="Олія з гарбуза">
+                <h3>Гарбузова олія</h3>
+                <p>Багата на вітаміни і мінерали, корисна для травлення, зміцнення імунітету та покращення стану шкіри.</p>
+                <div class="price">430 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
+                <button class="btn" onclick="addToCart('Гарбузова олія', 430)">Додати в кошик</button>
+            </div>
+
+            <div class="product-card">
+                <img src="static/foto1.jpg" alt="Олія волоського горіха">
+                <h3>Олія волоського горіха</h3>
+                <p>Багата на омега-3 і омега-6 жирні кислоти. Ідеальна для зміцнення здоров'я серця та мозкової діяльності.</p>
+                <div class="price">300 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
+                <button class="btn" onclick="addToCart('Олія волоського горіха', 300)">Додати в кошик</button>
+            </div>
+
+            <div class="product-card">
+                <img src="подсолнух.png" alt="Олія соняха">
+                <h3>Олія соняха</h3>
+                <p>Зберігає всі корисні речовини, властиві соняшниковій культурі. Ідеально підходить для щоденного вживання.</p>
+                <div class="price">150 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
+                <button class="btn" onclick="addToCart('Олія соняха', 150)">Додати в кошик</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h2>Хто ми?</h2>
+        <p>Ми — два брати, які вкладають душу у виробництво натурального та корисного продукту. Ми контролюємо весь процес: від відбору насіння до ідеальної краплі олії у вашій пляшці. А якщо вам цікаво дізнатися більше про наші пригоди та життєву філософію, заглядайте на наш YouTube-канал <strong>Wild Nomads Brotherhood</strong>!</p>
+    </section>
+
+    <footer>
+        <p>Контактна інформація: <br>
+        Email: <a href="mailto:ecosmbu@gmail.com">ecosmbu@gmail.com</a> | Телефон: <a href="tel:+380935678890">+38 (093) 567-88-90</a></p>
+        <p style="font-size: 12px; margin-top: 20px; opacity: 0.7;">© 2026 Еко Олії СМБУ. Всі права захищено.</p>
+    </footer>
+
+    <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999;" onclick="closeCart()"></div>
     
-    <div class="container">
-        <div class="product">
-            <img src="static/foto2.jpg" alt="Конопляне масло" class="product-img">
-            <div class="description">
-                <h2>Конопляна олія</h2>
-                <p>Конопляне олія холодного віджиму багате на білки, незамінні жирні кислоти та вітаміни. Підтримує здоров'я шкіри та загальний стан організму.</p>
-                <div class="prices">
-                    <p>250 мл - 330 грн</p>
-                </div>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfG-WLvSczR6rqf5-kfKgptKZU4UFqxHpkvJB9o4JL4jqgrg/viewform?usp=sf_link" class="order-button" target="_blank">Замовити</a>
-        </div>
-
-        <div class="product">
-            <img src="static/foto3.jpg" alt="Льняне масло" class="product-img">
-            <div class="description">
-                <h2>Льняна олія</h2>
-                <p>Льняна олія холодного віджиму - багате джерело омега-3 жирних кислот, сприяє зниженню рівня холестерину та покращенню роботи серцево-судинної системи.</p>
-                <div class="prices">                
-                    <p>250 мл - 230 грн</p>
-                </div>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfG-WLvSczR6rqf5-kfKgptKZU4UFqxHpkvJB9o4JL4jqgrg/viewform?usp=sf_link" class="order-button" target="_blank">Замовити</a>
-        </div>
-
-        <div class="product">
-            <img src="static/foto4.jpg" alt="Масло чорного кмину" class="product-img">
-            <div class="description">
-                <h2>Олія чорного кмину</h2>
-                <p>Олія чорного кмину холодного віджиму зберігає всі корисні властивості, багате на антиоксиданти та ідеально підходить для підтримки імунної системи.</p>
-                <div class="prices">  
-                    <p>250 мл - 730 грн</p>
-                </div>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfG-WLvSczR6rqf5-kfKgptKZU4UFqxHpkvJB9o4JL4jqgrg/viewform?usp=sf_link" class="order-button" target="_blank">Замовити</a>
-        </div>
-
-        <div class="product">
-            <img src="static/foto5.jpg" alt="Масло з гарбуза" class="product-img">
-            <div class="description">
-                <h2>Олія з гарбуза</h2>
-                <p>Гарбузова олія холодного віджиму багата на вітаміни і мінерали, корисна для травлення, зміцнення імунітету та покращення стану шкіри.</p>
-                <div class="prices">
-                    <p>250 мл - 430 грн</p>
-                </div>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfG-WLvSczR6rqf5-kfKgptKZU4UFqxHpkvJB9o4JL4jqgrg/viewform?usp=sf_link" class="order-button" target="_blank">Замовити</a>
-        </div>
-
-        <div class="product">
-            <img src="static/foto1.jpg" alt="Масло грецького горіха" class="product-img">
-            <div class="description">
-                <h2>Олія волоського горіха</h2>
-                <p>Олія волоського горіха холодного віджиму багата на омега-3 і омега-6 жирні кислоти. Ідеальна для зміцнення здоров'я серця та мозкової діяльності.</p>
-                <div class="prices">                  
-                    <p>250 мл - 300 грн</p>               
-                </div>
-            </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfG-WLvSczR6rqf5-kfKgptKZU4UFqxHpkvJB9o4JL4jqgrg/viewform?usp=sf_link" class="order-button" target="_blank">Замовити</a>
-        </div>
-
-        <div class="product">
-            <img src="static/foto6.jpg" alt="Масло соняха" class="product-img">
-            <div class="description">
-                <h2>Олія соняха</h2>
-                <p>Соняшникова олія холодного віджиму зберігає всі корисні речовини, властиві соняшниковій культурі. Підходить для щоденного вживання.</p>
-                <div class="prices">
-                    <p>250 мл - 150 грн</p>
-                </div>
-            </div>
-            <a href=https://docs.google.com/forms/d/e/1FAIpQLSdfG-WLvSczR6rqf5-kfKgptKZU4UFqxHpkvJB9o4JL4jqgrg/viewform?usp=sf_link class="order-button" target="_blank">Замовити</a>
-        </div>
-
-        <div class="contact-info">
-            <h3>Контактна інформація</h3>
-            <p>Email: ecosmbu@gmail.com</p>
-            <p>Телефон: +38 (093) 567-88-90</p>
+    <div id="cartModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:30px; border-radius:10px; box-shadow:0 5px 25px rgba(0,0,0,0.3); z-index:1000; width: 90%; max-width: 400px; max-height: 85vh; overflow-y: auto;">
+        <h3 style="margin-top:0; color:var(--primary-color); font-size:24px;">Ваше замовлення</h3>
+        <ul id="cartItemsList" style="padding:0; margin-bottom:20px; color:#555;"></ul>
+        <p style="font-weight:bold; font-size:20px; border-top: 2px solid #eee; padding-top: 15px; margin-bottom:20px;">Всього: <span id="totalPrice">0</span> грн</p>
+        
+        <input type="text" id="customerName" class="modal-input" placeholder="Ваше ім'я (ПІБ)" required>
+        <input type="tel" id="customerPhone" class="modal-input" placeholder="Ваш телефон" required>
+        <input type="text" id="customerAddress" class="modal-input" placeholder="Місто та відділення Нової Пошти" style="margin-bottom:25px;" required>
+        
+        <div style="display:flex; justify-content:space-between; gap: 10px;">
+            <button onclick="closeCart()" style="flex:1; padding:12px; background:#e9ecef; border:none; border-radius:5px; cursor:pointer; font-weight:bold; color:#333; transition:0.3s;" onmouseover="this.style.background='#d3d6d8'" onmouseout="this.style.background='#e9ecef'">Закрити</button>
+            <button onclick="submitOrder()" style="flex:1; padding:12px; background:var(--primary-color); color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; transition:0.3s;" onmouseover="this.style.background='#1a3823'" onmouseout="this.style.background='var(--primary-color)'">Оформити</button>
         </div>
     </div>
+
+    <script type="text/javascript">
+        // НЕ ЗАБУДЬТЕ ВСТАВИТИ СВІЙ PUBLIC KEY ВІД EMAILJS ТУТ!
+        (function() {
+            emailjs.init("RxCrDTo0_dZ93MUY8"); 
+        })();
+
+        let cart = [];
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+            openCart();
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cartItemsList');
+            const totalSpan = document.getElementById('totalPrice');
+            const cartCount = document.getElementById('cartCount');
+            
+            list.innerHTML = '';
+            let total = 0;
+            let totalItems = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = '<li style="list-style:none; color:#888; text-align:center; padding:20px 0;">Ваш кошик порожній 🛒</li>';
+            } else {
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    totalItems += item.quantity;
+                    
+                    list.innerHTML += `
+                        <li style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:12px;">
+                            <div style="line-height:1.4;">
+                                <b style="color:var(--text-color); font-size:16px;">${item.name}</b> <br> 
+                                <span style="font-size:14px;">${item.quantity} шт. x ${item.price} грн = <b style="color:var(--primary-color);">${item.price * item.quantity} грн</b></span>
+                            </div>
+                            <button onclick="removeFromCart('${item.name}')" style="background:#ff4d4d; color:white; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-weight:bold; display:flex; justify-content:center; align-items:center; transition:0.3s; font-size:12px;" onmouseover="this.style.background='#cc0000'" onmouseout="this.style.background='#ff4d4d'" title="Видалити">✕</button>
+                        </li>`;
+                });
+            }
+            
+            totalSpan.innerText = total;
+            cartCount.innerText = totalItems;
+        }
+
+        function openCart() {
+            updateCartUI();
+            document.getElementById('cartModal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+
+            if (cart.length === 0) {
+                alert('Ваш кошик порожній!');
+                return;
+            }
+
+            if (!name || !phone || !address) {
+                alert('Будь ласка, заповніть всі контактні дані для доставки.');
+                return;
+            }
+
+            // Змінюємо текст кнопки для візуального ефекту завантаження
+            const submitBtn = event.target;
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Відправляємо...';
+            submitBtn.disabled = true;
+
+            const orderDetailsText = cart.map(item => `- ${item.name}: ${item.quantity} шт. (${item.price * item.quantity} грн)`).join('\n');
+            const totalAmountValue = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            const templateParams = {
+                name: name,
+                phone: phone,
+                address: address,
+                order_details: orderDetailsText,
+                total_amount: totalAmountValue
+            };
+
+            // НЕ ЗАБУДЬТЕ ВСТАВИТИ СВІЙ SERVICE ID ТА TEMPLATE ID ТУТ!
+            emailjs.send('service_3078gcs', 'template_pvqqdtiD', templateParams)
+                .then(function(response) {
+                    alert('Дякуємо! Ваше замовлення успішно прийнято. Ми скоро з вами зв\'яжемось для підтвердження.');
+                    cart = [];
+                    updateCartUI();
+                    document.getElementById('customerName').value = '';
+                    document.getElementById('customerPhone').value = '';
+                    document.getElementById('customerAddress').value = '';
+                    closeCart();
+                    
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                }, function(error) {
+                    alert('Сталася помилка при відправці. Перевірте з\'єднання або напишіть нам напряму.');
+                    console.log('Помилка EmailJS:', error);
+                    
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        }
+    </script>
 </body>
 </html>
-
 
