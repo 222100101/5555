@@ -257,7 +257,7 @@
         <div class="products-grid">
             
             <div class="product-card">
-                <img src="конопля.png" alt="Конопляна олія">
+                <img src="static/foto2.jpg" alt="Конопляна олія">
                 <h3>Конопляна олія</h3>
                 <p>Багата на білки, незамінні жирні кислоти та вітаміни. Підтримує здоров'я шкіри та загальний стан організму.</p>
                 <div class="price">330 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
@@ -265,7 +265,7 @@
             </div>
 
             <div class="product-card">
-                <img src="льон.png" alt="Льняна олія">
+                <img src="static/foto3.jpg" alt="Льняна олія">
                 <h3>Льняна олія</h3>
                 <p>Багате джерело омега-3 жирних кислот, сприяє зниженню рівня холестерину та покращенню роботи серця.</p>
                 <div class="price">230 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
@@ -273,7 +273,7 @@
             </div>
 
             <div class="product-card">
-                <img src="кмин.png" alt="Олія чорного кмину">
+                <img src="static/foto4.jpg" alt="Олія чорного кмину">
                 <h3>Олія чорного кмину</h3>
                 <p>Зберігає всі корисні властивості, багата на антиоксиданти та ідеально підходить для підтримки імунітету.</p>
                 <div class="price">730 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
@@ -281,7 +281,7 @@
             </div>
 
             <div class="product-card">
-                <img src="гарбуз.png" alt="Олія з гарбуза">
+                <img src="static/foto5.jpg" alt="Олія з гарбуза">
                 <h3>Гарбузова олія</h3>
                 <p>Багата на вітаміни і мінерали, корисна для травлення, зміцнення імунітету та покращення стану шкіри.</p>
                 <div class="price">430 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
@@ -297,7 +297,7 @@
             </div>
 
             <div class="product-card">
-                <img src="подсолнух.png" alt="Олія соняха">
+                <img src="static/foto6.jpg" alt="Олія соняха">
                 <h3>Олія соняха</h3>
                 <p>Зберігає всі корисні речовини, властиві соняшниковій культурі. Ідеально підходить для щоденного вживання.</p>
                 <div class="price">150 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
@@ -309,7 +309,7 @@
 
     <section class="about-us">
         <h2>Хто ми?</h2>
-        <p>Ми — два брати, які вкладають душу у виробництво натурального та корисного продукту. Ми контролюємо весь процес: від відбору насіння до ідеальної краплі олії у вашій пляшці. А якщо вам цікаво дізнатися більше про наші пригоди та життєву філософію, заглядайте на наш YouTube-канал <strong>Wild Nomads Brotherhood</strong>!</p>
+        <p>Ми — сім'я, яка вкладає душу у виробництво натурального та корисного продукту. Ми контролюємо весь процес: від відбору насіння до ідеальної краплі олії у вашій пляшці. А якщо вам цікаво дізнатися більше про наші пригоди та життєву філософію, заглядайте на наш YouTube-канал <strong>Wild Nomads Brotherhood</strong>!</p>
     </section>
 
     <footer>
@@ -336,11 +336,9 @@
     </div>
 
     <script type="text/javascript">
-        // -----------------------------------------------------------------
-        // УВАГА: ВСТАВТЕ СЮДИ ВАШ PUBLIC KEY ВІД EMAILJS (замість тексту)
-        // -----------------------------------------------------------------
+       
         (function() {
-            emailjs.init("ВАШ_PUBLIC_KEY"); 
+            emailjs.init("RxCrDTo0_dZ93MUY8"); 
         })();
 
         let cart = [];
@@ -434,10 +432,8 @@
                 total_amount: totalAmountValue
             };
 
-            // -----------------------------------------------------------------
-            // УВАГА: ВСТАВТЕ СЮДИ ВАШ SERVICE ID ТА TEMPLATE ID ВІД EMAILJS
-            // -----------------------------------------------------------------
-            emailjs.send('ВАШ_SERVICE_ID', 'ВАШ_TEMPLATE_ID', templateParams)
+           
+            emailjs.send('service_3078gcs', 'template_pvqqdtiD', templateParams)
                 .then(function(response) {
                     alert('Дякуємо! Ваше замовлення успішно прийнято. Ми скоро з вами зв\'яжемось для підтвердження.');
                     cart = [];
@@ -460,5 +456,6 @@
     </script>
 </body>
 </html>
+
 
 
