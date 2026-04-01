@@ -60,7 +60,7 @@
             color: white;
         }
 
-        /* ГОЛОВНИЙ ЕКРАН З ВІДЕО (Оновлено для 100% роботи) */
+        /* ГОЛОВНИЙ ЕКРАН З ВІДЕО */
         .hero {
             position: relative;
             height: 70vh;
@@ -68,9 +68,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
+            color: #000000;
             overflow: hidden;
-            background-color: #1e4229; /* Фон-заглушка, якщо відео вантажиться */
+            background-color: #e9ecef;
         }
 
         .hero video {
@@ -82,7 +82,7 @@
             width: auto;
             height: auto;
             transform: translateX(-50%) translateY(-50%);
-            z-index: 1; /* Відео на найнижчому шарі */
+            z-index: 1;
             object-fit: cover;
         }
 
@@ -92,13 +92,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Напівпрозорий чорний колір */
-            z-index: 2; /* Затемнення лежить НАД відео */
+            background: rgba(255, 255, 255, 0.4);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 3; /* Текст лежить НАД усім іншим */
+            z-index: 3;
         }
 
         .hero h1 {
@@ -109,6 +109,7 @@
         .hero p {
             font-size: 20px;
             margin-bottom: 30px;
+            font-weight: 500;
         }
 
         .btn {
@@ -128,6 +129,11 @@
             background-color: #1a3823;
         }
 
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
         /* СІТКА ТОВАРІВ */
         .catalog {
             padding: 60px 10%;
@@ -142,7 +148,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -165,7 +171,7 @@
         .product-card img {
             width: 100%;
             height: 320px; 
-            object-fit: contain; /* Щоб високі пляшки не обрізалися */
+            object-fit: contain; 
             margin-bottom: 20px;
             transition: transform 0.3s;
         }
@@ -184,13 +190,33 @@
             font-size: 14px;
             color: #666;
             flex-grow: 1;
+            margin-bottom: 20px;
         }
 
-        .price {
-            font-size: 22px;
-            font-weight: bold;
+        /* Опції покупки (100 мл і 250 мл) */
+        .purchase-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .vol-price {
+            font-size: 16px;
             color: var(--text-color);
-            margin: 15px 0;
+        }
+
+        .vol-price b {
+            color: var(--primary-color);
         }
 
         /* ПРО НАС */
@@ -219,7 +245,7 @@
             text-decoration: none;
         }
 
-        /* КОШИК (Стилі інпутів) */
+        /* КОШИК */
         .modal-input {
             width: 100%; 
             padding: 12px; 
@@ -260,48 +286,108 @@
                 <img src="static/foto2.jpg" alt="Конопляна олія">
                 <h3>Конопляна олія</h3>
                 <p>Багата на білки, незамінні жирні кислоти та вітаміни. Підтримує здоров'я шкіри та загальний стан організму.</p>
-                <div class="price">330 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
-                <button class="btn" onclick="addToCart('Конопляна олія', 330)">Додати в кошик</button>
+                <div class="purchase-options">
+                    <div class="option">
+                        <span class="vol-price">100 мл — <b>150 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Конопляна олія (100 мл)', 150)">В кошик</button>
+                    </div>
+                    <div class="option">
+                        <span class="vol-price">250 мл — <b>300 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Конопляна олія (250 мл)', 330)">В кошик</button>
+                    </div>
+                </div>
             </div>
 
             <div class="product-card">
                 <img src="static/foto3.jpg" alt="Льняна олія">
                 <h3>Льняна олія</h3>
                 <p>Багате джерело омега-3 жирних кислот, сприяє зниженню рівня холестерину та покращенню роботи серця.</p>
-                <div class="price">230 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
-                <button class="btn" onclick="addToCart('Льняна олія', 230)">Додати в кошик</button>
+                <div class="purchase-options">
+                    <div class="option">
+                        <span class="vol-price">100 мл — <b>100 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Льняна олія (100 мл)', 110)">В кошик</button>
+                    </div>
+                    <div class="option">
+                        <span class="vol-price">250 мл — <b>200 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Льняна олія (250 мл)', 230)">В кошик</button>
+                    </div>
+                </div>
             </div>
 
             <div class="product-card">
                 <img src="static/foto4.jpg" alt="Олія чорного кмину">
                 <h3>Олія чорного кмину</h3>
                 <p>Зберігає всі корисні властивості, багата на антиоксиданти та ідеально підходить для підтримки імунітету.</p>
-                <div class="price">730 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
-                <button class="btn" onclick="addToCart('Олія чорного кмину', 730)">Додати в кошик</button>
+                <div class="purchase-options">
+                    <div class="option">
+                        <span class="vol-price">100 мл — <b>300 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Олія чорного кмину (100 мл)', 310)">В кошик</button>
+                    </div>
+                    <div class="option">
+                        <span class="vol-price">250 мл — <b>700 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Олія чорного кмину (250 мл)', 730)">В кошик</button>
+                    </div>
+                </div>
             </div>
 
             <div class="product-card">
                 <img src="static/foto5.jpg" alt="Олія з гарбуза">
                 <h3>Гарбузова олія</h3>
                 <p>Багата на вітаміни і мінерали, корисна для травлення, зміцнення імунітету та покращення стану шкіри.</p>
-                <div class="price">430 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
-                <button class="btn" onclick="addToCart('Гарбузова олія', 430)">Додати в кошик</button>
+                <div class="purchase-options">
+                    <div class="option">
+                        <span class="vol-price">100 мл — <b>150 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Гарбузова олія (100 мл)', 190)">В кошик</button>
+                    </div>
+                    <div class="option">
+                        <span class="vol-price">250 мл — <b>300 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Гарбузова олія (250 мл)', 430)">В кошик</button>
+                    </div>
+                </div>
             </div>
 
             <div class="product-card">
                 <img src="static/foto1.jpg" alt="Олія волоського горіха">
                 <h3>Олія волоського горіха</h3>
                 <p>Багата на омега-3 і омега-6 жирні кислоти. Ідеальна для зміцнення здоров'я серця та мозкової діяльності.</p>
-                <div class="price">300 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
-                <button class="btn" onclick="addToCart('Олія волоського горіха', 300)">Додати в кошик</button>
+                <div class="purchase-options">
+                    <div class="option">
+                        <span class="vol-price">100 мл — <b>130 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Олія волоського горіха (100 мл)', 140)">В кошик</button>
+                    </div>
+                    <div class="option">
+                        <span class="vol-price">250 мл — <b>250 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Олія волоського горіха (250 мл)', 300)">В кошик</button>
+                    </div>
+                </div>
             </div>
 
             <div class="product-card">
                 <img src="static/foto6.jpg" alt="Олія соняха">
                 <h3>Олія соняха</h3>
                 <p>Зберігає всі корисні речовини, властиві соняшниковій культурі. Ідеально підходить для щоденного вживання.</p>
-                <div class="price">150 грн <span style="font-size:14px; color:#888; font-weight:normal;">/ 250 мл</span></div>
-                <button class="btn" onclick="addToCart('Олія соняха', 150)">Додати в кошик</button>
+                <div class="purchase-options">
+                    <div class="option">
+                        <span class="vol-price">100 мл — <b>70 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Олія соняха (100 мл)', 70)">В кошик</button>
+                    </div>
+                    <div class="option">
+                        <span class="vol-price">250 мл — <b>150 грн</b></span>
+                        <button class="btn btn-sm" onclick="addToCart('Олія соняха (250 мл)', 150)">В кошик</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" style="border: 2px solid var(--primary-color);">
+                <img src="набір.png" alt="Дегустаційний набір олій">
+                <h3>Дегустаційний набір</h3>
+                <p>Ідеальна можливість спробувати все! До набору входять 6 видів нашої крафтової олії по 100 мл кожна (конопляна, льняна, чорного кмину, гарбузова, волоського горіха, соняшникова).</p>
+                <div class="purchase-options" style="margin-top: auto;">
+                    <div class="option" style="justify-content: center; background: none; border: none; padding: 0; margin-bottom: 10px;">
+                        <span class="vol-price" style="font-size: 22px;"><b>999 грн</b> <span style="font-size:14px; color:#888; font-weight:normal;">/ 6 шт. по 100 мл</span></span>
+                    </div>
+                    <button class="btn" style="width: 100%;" onclick="addToCart('Дегустаційний набір (6х100 мл)', 999)">Додати набір в кошик</button>
+                </div>
             </div>
 
         </div>
@@ -336,7 +422,6 @@
     </div>
 
     <script type="text/javascript">
-       
         (function() {
             emailjs.init("RxCrDTo0_dZ93MUY8"); 
         })();
@@ -432,7 +517,6 @@
                 total_amount: totalAmountValue
             };
 
-           
             emailjs.send('service_3078gcs', 'template_ot42gdh', templateParams)
                 .then(function(response) {
                     alert('Дякуємо! Ваше замовлення успішно прийнято. Ми скоро з вами зв\'яжемось для підтвердження.');
@@ -456,7 +540,6 @@
     </script>
 </body>
 </html>
-
 
 
 
